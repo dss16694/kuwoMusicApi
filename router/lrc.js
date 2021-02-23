@@ -16,7 +16,9 @@ router.get(`/`, (req, res, next) => {
   }
   request(options, (err, response, body) => {
     if (!err) {
-      res.send(JSON.parse(body))
+      var json = JSON.parse(body)
+      json.rid = rid
+      res.send(json)
     } else {
       res.sendResult(null, 500, '請求失敗')
     }
