@@ -18,10 +18,14 @@ router.get(`/`, (req, res, next) => {
     }
     request(options, (err, response, body) => {
         if (!err) {
-          var json = JSON.parse(body)
-          json.rid = rid
-          
-          return res.send(json)
+		  if(body != "failed"){
+			  var json = JSON.parse(body)
+			  json.rid = rid
+			  return res.send(json)    
+		  }
+		  json2 = {"code":500,"msg":"failed","url":"","rid":""}
+		  json2.rid = rid
+		  return res.send(json2) 
         } 
         res.sendResult(null,500,"請求失敗")
     })
