@@ -45,6 +45,25 @@ router.get(`/searchMusicBykeyWord`, (req, res, next) => {
         }
     })
 })
+// 返回增加播放地址
+router.get(`/searchMusic`, (req, res, next) => {
+    const {
+        key,
+        pn = 1,
+        rn = 30
+    } = req.query
+    const options = {
+        url: `http://r6300.rdfujitec.win:1880/search/searchMusicBykeyWord?pn=${pn}&rn=${rn}&key=` + encodeURIComponent(key),
+        headers: requestHeader
+    }
+    request(options, (err, response, body) => {
+        if (!err) {
+            res.json(JSON.parse(body))
+        } else {
+            res.sendResult(null, 500, '請求失敗')
+        }
+    })
+})
 // 专辑
 router.get(`/searchAlbumBykeyWord`, (req, res, next) => {
 
