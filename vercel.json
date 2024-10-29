@@ -1,0 +1,6 @@
+{
+  "routes": [
+    { "src": "/kuwo/(.*)", "dest": "/api/router.js" },
+    { "src": "/", "dest": "app/public/index.html" }
+  ]
+}
